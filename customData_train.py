@@ -172,7 +172,8 @@ if __name__ == '__main__':
 
     use_gpu = torch.cuda.is_available()
 
-    batch_size = 32
+    #batch_size = 32
+    batch_size = 8
     num_class = 3
     print("batch size:",batch_size,"num_classes:",num_class)
 
