@@ -25,7 +25,8 @@ import random
 #source_image_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/single-poly-defect/poly_OK"
 source_image_dir=".\data\ChartsComponent"
 
-target_image_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/data_for_resnet_classification"
+#target_image_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/data_for_resnet_classification"
+target_image_dir=".\data\data_for_resnet_classification"
 
 #txt_file_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/data_for_resnet_classification/TxtFile"
 txt_file_dir=".\data\TxtFile"
@@ -47,7 +48,7 @@ print("source_image_dir, source_image_list = ", source_image_dir, source_image_l
 for idx in range(len(source_image_list)):
     print("idx len(source_image_list) = ", idx, len(source_image_list))
     if idx > len(source_image_list):
-        print('下标超出范围，跳出循环')
+        print('list index out of range')
     break
     if '.png' in source_image_list[idx - 1]:
         continue
