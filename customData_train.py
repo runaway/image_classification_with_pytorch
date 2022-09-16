@@ -182,14 +182,23 @@ if __name__ == '__main__':
     #                                 data_transforms=data_transforms,
     #                                 dataset=x) for x in ['train', 'total_val']}
     image_datasets={}
-    image_datasets['train'] = customData(img_path='sin_poly_defect_data/',
-                                         txt_path=('sin_poly_defect_data/TxtFile/general_train.txt'),
+    #image_datasets['train'] = customData(img_path='sin_poly_defect_data/',
+    #                                     txt_path=('sin_poly_defect_data/TxtFile/general_train.txt'),
+    #                                     data_transforms=data_transforms,
+    #                                     dataset='train')
+    image_datasets['train'] = customData(img_path='data/data_for_resnet_classification',
+                                         txt_path=('data/TxtFile/train.txt'),
                                          data_transforms=data_transforms,
-                                         dataset='train')
-    image_datasets['val'] = customData(img_path='sin_poly_defect_data/',
-                                       txt_path=('sin_poly_defect_data/TxtFile/real_poly_defect.txt'),
+                                         dataset='train')                                         
+                                         
+    #image_datasets['val'] = customData(img_path='sin_poly_defect_data/',
+    #                                   txt_path=('sin_poly_defect_data/TxtFile/real_poly_defect.txt'),
+    #                                   data_transforms=data_transforms,
+    #                                   dataset='val')
+    image_datasets['val'] = customData(img_path='data/data_for_resnet_classification',
+                                       txt_path=('data/TxtFile/val.txt'),
                                        data_transforms=data_transforms,
-                                       dataset='val')
+                                       dataset='val')                                       
     # train_data=image_datasets.pop('general_train')
     # image_datasets['train']=train_data
     # val_data=image_datasets.pop('total_val')
