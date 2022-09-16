@@ -22,9 +22,13 @@ import os
 import random
 
 # variables need to be change
-source_image_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/single-poly-defect/poly_OK"
+#source_image_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/single-poly-defect/poly_OK"
+source_image_dir=".\data\ChartsComponent"
+
 target_image_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/data_for_resnet_classification"
-txt_file_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/data_for_resnet_classification/TxtFile"
+
+#txt_file_dir="/Users/Desktop/used/SuZhouRuiTu_dataset/data_for_resnet_classification/TxtFile"
+txt_file_dir=".\data\TxtFile"
 prefix="poly_OK"
 class_label=1
 # label 0: single_OK ; label_1: poly_OK ; label 2: poly_defect
@@ -34,23 +38,33 @@ print("-"*20)
 print("-"*20)
 print("-"*20)
 
+# 2.3 批处理生成数据与标签
+# 图像名称读取
 # load image list in the source dir
 source_image_list = os.listdir(source_image_dir)
+print("source_image_dir, source_image_list = ", source_image_dir, source_image_list)
+#在文件名列表里面去掉不是图像的文件
 for idx in range(len(source_image_list)):
-    if '.png' in source_image_list[idx-1]:
+    print("idx len(source_image_list) = ", idx, len(source_image_list))
+    if idx > len(source_image_list):
+        print('下标超出范围，跳出循环')
+    break
+    if '.png' in source_image_list[idx - 1]:
         continue
-    elif '.jpg' in source_image_list[idx-1]:
+    elif '.jpg' in source_image_list[idx - 1]:
         continue
     else:
-        del source_image_list[idx-1]
+        del source_image_list[idx - 1]
 
+# 序列乱序
 # shuffle image list
 print("initial list:")
-print source_image_list
+print (source_image_list)
 random.shuffle(source_image_list)
 print("shuffled list:")
-print source_image_list
+print (source_image_list)
 
+# list拆为两个list
 # train list and val list
 source_train_list=[]
 source_val_list=[]
@@ -60,10 +74,11 @@ for idx in range(len(source_image_list)):
     else:
         source_train_list.append(source_image_list[idx-1])
 print ("train_list")
-print source_train_list
+print (source_train_list)
 print("val_list")
-print source_val_list
+print (source_val_list)
 
+# 标签的生成
 # create label_file or write label file
 txt_file_train_name="train.txt"
 txt_file_val_name="val.txt"
@@ -75,9 +90,10 @@ val_txt_file= open(txt_file_val_path,"a")
 # write train images and labels
 print("write train images and labels......")
 for source_image_name in source_train_list:
-    print source_image_name
+    print (source_image_name)
 
-    # read dource images and rename
+    # 图像读出与写入
+    # read source images and rename
     path_source_img = os.path.join(source_image_dir, source_image_name)
     src_img = Image.open(path_source_img)
     full_image_name=prefix+"_train_"+source_image_name
@@ -85,6 +101,7 @@ for source_image_name in source_train_list:
     # save renamed image to the target dir
     target_image_path=os.path.join(target_image_dir, full_image_name)
     src_img.save(target_image_path)
+    #有必要对每行加一个"\n"进行结尾
     # write image names and labels
     line_strings= full_image_name+"\t"+str(class_label)+"\n"
     train_txt_file.write(line_strings)
@@ -92,7 +109,7 @@ for source_image_name in source_train_list:
 # write val images and labels
 print("write val images and labels......")
 for source_image_name in source_val_list:
-    print source_image_name
+    print (source_image_name)
 
     # read dource images and rename
     path_source_img = os.path.join(source_image_dir, source_image_name)
@@ -107,16 +124,16 @@ for source_image_name in source_val_list:
     val_txt_file.write(line_strings)
 
 print("source_image_dir:")
-print source_image_dir
+print (source_image_dir)
 print("target_image_dir:")
-print target_image_dir
+print (target_image_dir)
 print("prefix:")
-print prefix
+print (prefix)
 print("label:")
-print class_label
+print (class_label)
 
 print("image numbers:")
-print len(source_image_list)
+print(len(source_image_list))
 
 
 
