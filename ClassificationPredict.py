@@ -39,9 +39,9 @@ def preict_one_img(img_path):
  
 if __name__ == '__main__':
     # 训练的时候类别是怎么放的，这里的classes也要对应写
-    classes = ["BevelEdgePatch", "WedgeLine"]
+    classes = ["BevelEdgePatch", "ColorCheckerPatch", "WedgeLine"]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    img_path = "./data/ChartsComponent/b4.jpg"
+    img_path = "./data/ChartsComponent/w11.jpg"
     model_path = "./output/resnet_on_PV_best_total_val.pkl"
     print("Before net = torch.load")
     net = torch.load(model_path)
